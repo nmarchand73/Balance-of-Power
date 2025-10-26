@@ -65,16 +65,22 @@ src/
 ├── game/
 │   ├── GameEngine.ts       # Moteur principal
 │   ├── GameState.ts        # État du jeu
+│   ├── GameMechanics.ts    # Mécaniques de jeu
 │   ├── AIEngine.ts         # Intelligence artificielle
 │   ├── CrisisManager.ts    # Gestion des crises
-│   └── ContentManager.ts   # Gestion du contenu
+│   ├── ContentManager.ts   # Gestion du contenu
+│   ├── PolicyManager.ts    # Gestion des politiques
+│   ├── NewsManager.ts      # Gestion des actualités
+│   ├── SaveLoadManager.ts  # Sauvegarde/Chargement
+│   └── ScoreCalculator.ts  # Calcul des scores
 ├── data/
 │   ├── countries.ts        # Données des 80 pays
 │   ├── relations.ts        # Relations diplomatiques
 │   └── constants.ts        # Constantes du jeu
 ├── ui/
-│   ├── MapRenderer.ts      # Rendu de la carte
-│   └── UIManager.ts        # Gestion de l'interface
+│   ├── UIManager.ts        # Gestion de l'interface
+│   ├── CountryListRenderer.ts # Rendu de la liste des pays
+│   └── CountryDetailModal.ts  # Modal des détails de pays
 └── index.html              # Page principale
 ```
 
@@ -86,8 +92,10 @@ src/
 - **Intelligence artificielle** : IA sophistiquée avec décisions stratégiques variées
 - **Système de crises** : Détection, escalade nucléaire, réponses du joueur
 - **Système de contenu** : Headlines dynamiques, descriptions de politiques
-- **Interface utilisateur** : Carte interactive, dialogues, panels d'information
+- **Interface utilisateur** : Liste interactive des pays, dialogues, panels d'information
 - **Sauvegarde/Chargement** : Persistance des parties via LocalStorage
+- **Menus authentiques** : Système de menus fidèle au jeu original Pascal
+- **Fenêtres Background et History** : Interface détaillée avec graphiques interactifs
 
 ### 🎮 Actions Disponibles
 
@@ -110,10 +118,25 @@ src/
 
 ### Écran Principal
 
-- **Carte du monde** : Vue interactive des 80 pays
+- **Liste des pays** : Vue interactive des 80 pays organisés par catégories
 - **Panel de scores** : Scores USA/USSR en temps réel
 - **Panel de news** : Événements et headlines dynamiques
-- **Boutons d'action** : Next Turn, Policy, Closeup, etc.
+- **Barre de statut** : Informations sur le tour actuel et le pays sélectionné
+- **Menus authentiques** : Apple, Game, Political, Relations, Policy, Events, Briefing, Debug
+
+### Fenêtres Spécialisées
+
+- **Background Modal** : 
+  - Sélecteurs interactifs pour les ressources (GNP, Military Spending, Population, etc.)
+  - Visualisation de la carte avec légende
+  - Détails complets du pays sélectionné
+  - Calculs per capita et per GNP
+
+- **History Modal** :
+  - Trois graphiques détaillés (Military & Intervention, Diplomatic & Economic, Political & Influence)
+  - Timeline des événements majeurs
+  - Graphiques interactifs avec couleurs distinctes USA/USSR
+  - Section des changements récents
 
 ### Dialogues
 
@@ -192,9 +215,21 @@ npm run build
 - ✅ IA sophistiquée avec 4 niveaux
 - ✅ Système de crises et escalade nucléaire
 - ✅ Système de contenu dynamique
-- ✅ Interface utilisateur moderne
+- ✅ Interface utilisateur moderne avec liste des pays
 - ✅ Sauvegarde/chargement
 - ✅ 80 pays avec données réalistes
+- ✅ Menus authentiques fidèles au jeu original
+- ✅ Fenêtres Background et History avec graphiques interactifs
+- ✅ Système de sélection de pays amélioré
+- ✅ Intégration temps réel avec l'état du jeu
+
+### Nouvelles Fonctionnalités (Dernière mise à jour)
+
+- **Interface Background améliorée** : Sélecteurs interactifs pour visualiser différentes ressources (GNP, dépenses militaires, population, etc.) avec calculs per capita et per GNP
+- **Interface History enrichie** : Graphiques détaillés montrant l'évolution des relations diplomatiques, aides militaires/économiques, et événements politiques
+- **Système de menus authentique** : Menus Apple, Game, Political, Relations, Policy, Events, Briefing, Debug fidèles au jeu original Pascal
+- **Sélection de pays améliorée** : Possibilité de sélectionner un pays sans ouvrir immédiatement le modal, avec bouton "Details" pour accéder aux informations
+- **Affichage de tous les pays** : Liste complète des 80 pays organisés par catégories (Superpower, Great Power, Regional Power, Strategic, Other)
 
 ## 🤝 Contribution
 
