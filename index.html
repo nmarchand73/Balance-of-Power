@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance of Power</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #0000ff;
+            color: #000000;
+            font-size: 12px;
+            line-height: 1.2;
+            overflow: hidden;
+        }
+
+        #game-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Menu bar */
+        #menu-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background-color: #c0c0c0;
+            border-bottom: 2px solid #808080;
+            display: flex;
+            align-items: center;
+            padding: 0 4px;
+            z-index: 1000;
+        }
+
+        .menu-item {
+            padding: 2px 8px;
+            margin-right: 4px;
+            background-color: #c0c0c0;
+            border: 1px solid #808080;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .menu-item:hover {
+            background-color: #e0e0e0;
+        }
+
+        .menu-close {
+            margin-left: auto;
+            width: 16px;
+            height: 16px;
+            background-color: #c0c0c0;
+            border: 1px solid #808080;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .menu-close::before {
+            content: '×';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Main game area */
+        #main-game-area {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            bottom: 60px;
+            background-color: #0000ff;
+        }
+
+        #game-canvas {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: visible;
+            background-color: #0000ff;
+        }
+
+        #game-canvas svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background-color: #0000ff;
+        }
+
+        #game-canvas path {
+            transition: fill 0.3s ease, stroke-width 0.2s ease;
+            cursor: pointer;
+        }
+
+
+
+        /* Color legend */
+        #color-legend {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+            padding: 4px;
+            z-index: 50;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2px;
+            font-size: 10px;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            margin-right: 4px;
+            border: 1px solid #000000;
+        }
+
+        /* Status bar */
+        #status-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: #c0c0c0;
+            border-top: 2px solid #808080;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 16px;
+            z-index: 1000;
+            font-family: 'Courier New', monospace;
+        }
+
+        .status-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 4px 8px;
+            border-radius: 2px;
+        }
+
+        .status-label {
+            font-weight: bold;
+            font-size: 11px;
+            color: #000000;
+        }
+
+        .status-value {
+            font-weight: bold;
+            font-size: 12px;
+            color: #000000;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* Country selection */
+        .country-selection {
+            position: absolute;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        .country-selection::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #000000;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .country-name {
+            position: absolute;
+            top: 12px;
+            left: 0;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 2px 4px;
+            border: 1px solid #000000;
+            font-size: 10px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* Country Detail Modal */
+        .country-detail-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            max-height: 80vh;
+            background-color: #ffffff;
+            border: 3px solid #000000;
+            z-index: 2000;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            overflow-y: auto;
+        }
+
+        .country-detail-header {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 4px 8px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .country-detail-close {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 0;
+            width: 16px;
+            height: 16px;
+        }
+
+        .country-detail-content {
+            padding: 8px;
+        }
+
+        .detail-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 8px;
+        }
+
+        .detail-table th {
+            background-color: #c0c0c0;
+            border: 1px solid #000000;
+            padding: 2px 4px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        .detail-table td {
+            border: 1px solid #000000;
+            padding: 2px 4px;
+            font-size: 10px;
+        }
+
+        .detail-table .row-label {
+            background-color: #e0e0e0;
+            font-weight: bold;
+            width: 120px;
+        }
+
+        .detail-table .usa-value {
+            text-align: center;
+            width: 80px;
+        }
+
+        .detail-table .ussr-value {
+            text-align: center;
+            width: 80px;
+        }
+
+        .detail-table .totals {
+            text-align: center;
+            width: 80px;
+        }
+
+        .arrow-up::before {
+            content: '↑';
+            color: #000000;
+            margin-right: 2px;
+        }
+
+        .arrow-down::before {
+            content: '↓';
+            color: #000000;
+            margin-right: 2px;
+        }
+
+        .max-value {
+            color: #000000;
+        }
+
+        .max-value::before {
+            content: '{';
+        }
+
+        .max-value::after {
+            content: '}';
+        }
+
+        .detail-info {
+            margin-top: 8px;
+            font-size: 10px;
+        }
+
+        /* Policy controls */
+        .policy-controls {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 2px solid #000000;
+        }
+
+        .policy-controls h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            text-align: center;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 5px;
+        }
+
+        .policy-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .policy-btn {
+            padding: 5px;
+            font-size: 10px;
+            background-color: #c0c0c0;
+            border: 1px solid #000000;
+            cursor: pointer;
+            font-family: monospace;
+        }
+
+        .policy-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .policy-btn:active {
+            background-color: #a0a0a0;
+        }
+
+        .policy-btn.active {
+            background-color: #000000;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .policy-btn.active:hover {
+            background-color: #333333;
+        }
+
+        .policy-level {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .policy-level label {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .policy-level input[type="range"] {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .game-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .game-controls button {
+            padding: 8px 15px;
+            font-size: 12px;
+            background-color: #c0c0c0;
+            border: 2px solid #000000;
+            cursor: pointer;
+            font-family: monospace;
+            font-weight: bold;
+        }
+
+        .game-controls button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .game-controls button:active {
+            background-color: #a0a0a0;
+        }
+
+        .detail-info div {
+            margin-bottom: 2px;
+        }
+
+        .detail-info .label {
+            font-weight: bold;
+            display: inline-block;
+            width: 100px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .country-detail-modal {
+                width: 90vw;
+                max-height: 90vh;
+            }
+            
+            .detail-table {
+                font-size: 9px;
+            }
+            
+            .detail-table th,
+            .detail-table td {
+                padding: 1px 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <!-- Menu bar -->
+        <div id="menu-bar">
+            <div class="menu-item">Apple</div>
+            <div class="menu-item">Game</div>
+            <div class="menu-item">Political</div>
+            <div class="menu-item">Relations</div>
+            <div class="menu-item">Policy</div>
+            <div class="menu-item">Events</div>
+            <div class="menu-item">Briefing</div>
+            <div class="menu-item">Debug</div>
+            <div class="menu-close"></div>
+        </div>
+        
+        <!-- Main game area -->
+        <div id="main-game-area">
+            <div id="game-canvas">
+                <!-- La vraie carte du monde sera chargée ici par SVGMapRenderer -->
+            </div>
+            
+            <!-- Color legend -->
+            <div id="color-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #fff;"></div>
+                    <span>None</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #00ffff;"></div>
+                    <span>Finlandization</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #00ff00;"></div>
+                    <span>Coup d'Etat</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #ff0000;"></div>
+                    <span>Revolution</span>
+                </div>
+            </div>
+        </div>
+        
+               <!-- Status bar -->
+               <div id="status-bar">
+                   <div class="status-section">
+                       <div class="status-label">Year:</div>
+                       <div class="status-value" id="year-display">1989</div>
+                   </div>
+                   <div class="status-section">
+                       <div class="status-label">USA Score:</div>
+                       <div class="status-value" id="usa-score">0</div>
+                   </div>
+                   <div class="status-section">
+                       <div class="status-label">USSR Score:</div>
+                       <div class="status-value" id="ussr-score">0</div>
+                   </div>
+                   <div class="status-section">
+                       <div class="status-label">Level:</div>
+                       <div class="status-value" id="level-display">1</div>
+                   </div>
+                   <div class="status-section">
+                       <div class="status-label">Nastiness:</div>
+                       <div class="status-value" id="nastiness-display">8</div>
+                   </div>
+                   <div class="status-section">
+                       <div class="status-label">Selected:</div>
+                       <div class="status-value" id="selected-country">None</div>
+                       <button id="details-button" style="margin-left: 8px; padding: 2px 6px; font-size: 10px; background: #ffffff; border: 1px solid #000000; cursor: pointer;">Details</button>
+                   </div>
+                   <div class="status-section">
+                       <div class="status-label">Phase:</div>
+                       <div class="status-value" id="turn-phase">Planning Phase</div>
+                   </div>
+               </div>
+    </div>
+    
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
