@@ -1,255 +1,255 @@
 # Balance of Power - Web Edition
 
-Une adaptation web moderne du jeu de stratégie géopolitique classique **Balance of Power** de Chris Crawford, simulant la Guerre Froide entre les USA et l'URSS.
+A modern web adaptation of the classic geopolitical strategy game **Balance of Power** by Chris Crawford, simulating the Cold War between the USA and USSR.
 
-## 🎮 À Propos du Jeu
+## 🎮 About the Game
 
-Balance of Power est un jeu de stratégie géopolitique où vous dirigez soit les États-Unis soit l'Union Soviétique pendant la Guerre Froide. Votre objectif est d'influencer 80 pays du monde entier via la diplomatie, l'aide économique/militaire, et la déstabilisation, tout en évitant de déclencher une guerre nucléaire.
+Balance of Power is a geopolitical strategy game where you lead either the United States or the Soviet Union during the Cold War. Your objective is to influence 80 countries worldwide through diplomacy, economic/military aid, and destabilization, while avoiding nuclear war.
 
-### Mécaniques Principales
+### Main Mechanics
 
-- **80 pays** avec des données géopolitiques réalistes
-- **Système de relations diplomatiques** complexe
-- **Actions politiques** : aide économique, militaire, interventions, pressions
-- **Système de crises** avec escalade nucléaire
-- **Intelligence artificielle** sophistiquée avec 4 niveaux de difficulté
-- **Système de news** dynamique avec headlines contextuelles
+- **80 countries** with realistic geopolitical data
+- **Complex diplomatic relations system**
+- **Political actions**: economic aid, military aid, interventions, pressure
+- **Crisis system** with nuclear escalation
+- **Sophisticated artificial intelligence** with 4 difficulty levels
+- **Dynamic news system** with contextual headlines
 
-## 🚀 Démarrage Rapide
+## 🚀 Quick Start
 
-### Prérequis
+### Prerequisites
 
 - Node.js 18+ 
-- npm ou yarn
+- npm or yarn
 
 ### Installation
 
 ```bash
-# Cloner le projet
-git clone <repository-url>
-cd balance-of-power-web
+# Clone the project
+git clone https://github.com/nmarchand73/Balance-of-Power.git
+cd Balance-of-Power
 
-# Installer les dépendances
+# Install dependencies
 npm install
 
-# Démarrer le serveur de développement
+# Start development server
 npm run dev
 ```
 
-L'application sera disponible sur `http://localhost:3001`
+The application will be available at `http://localhost:3001`
 
-### Build de Production
+### Production Build
 
 ```bash
-# Construire pour la production
+# Build for production
 npm run build
 
-# Prévisualiser le build
+# Preview the build
 npm run preview
 ```
 
-## 🏗️ Architecture Technique
+## 🏗️ Technical Architecture
 
-### Stack Technologique
+### Technology Stack
 
-- **Frontend** : TypeScript + HTML5 Canvas
-- **Bundler** : Vite
-- **Rendu** : Canvas 2D API pour la carte interactive
-- **Stockage** : LocalStorage pour les sauvegardes
+- **Frontend**: TypeScript + HTML5 Canvas
+- **Bundler**: Vite
+- **Rendering**: Canvas 2D API for interactive map
+- **Storage**: LocalStorage for saves
 
-### Structure des Modules
+### Module Structure
 
 ```
 src/
-├── main.ts                 # Point d'entrée
+├── main.ts                 # Entry point
 ├── game/
-│   ├── GameEngine.ts       # Moteur principal
-│   ├── GameState.ts        # État du jeu
-│   ├── GameMechanics.ts    # Mécaniques de jeu
-│   ├── AIEngine.ts         # Intelligence artificielle
-│   ├── CrisisManager.ts    # Gestion des crises
-│   ├── ContentManager.ts   # Gestion du contenu
-│   ├── PolicyManager.ts    # Gestion des politiques
-│   ├── NewsManager.ts      # Gestion des actualités
-│   ├── SaveLoadManager.ts  # Sauvegarde/Chargement
-│   └── ScoreCalculator.ts  # Calcul des scores
+│   ├── GameEngine.ts       # Main engine
+│   ├── GameState.ts        # Game state
+│   ├── GameMechanics.ts    # Game mechanics
+│   ├── AIEngine.ts         # Artificial intelligence
+│   ├── CrisisManager.ts    # Crisis management
+│   ├── ContentManager.ts   # Content management
+│   ├── PolicyManager.ts    # Policy management
+│   ├── NewsManager.ts      # News management
+│   ├── SaveLoadManager.ts  # Save/Load management
+│   └── ScoreCalculator.ts  # Score calculation
 ├── data/
-│   ├── countries.ts        # Données des 80 pays
-│   ├── relations.ts        # Relations diplomatiques
-│   └── constants.ts        # Constantes du jeu
+│   ├── countries.ts        # 80 countries data
+│   ├── relations.ts        # Diplomatic relations
+│   └── constants.ts        # Game constants
 ├── ui/
-│   ├── UIManager.ts        # Gestion de l'interface
-│   ├── CountryListRenderer.ts # Rendu de la liste des pays
-│   └── CountryDetailModal.ts  # Modal des détails de pays
-└── index.html              # Page principale
+│   ├── UIManager.ts        # Interface management
+│   ├── CountryListRenderer.ts # Country list rendering
+│   └── CountryDetailModal.ts  # Country detail modal
+└── index.html              # Main page
 ```
 
-## 🎯 Fonctionnalités Implémentées
+## 🎯 Implemented Features
 
-### ✅ Systèmes Complets
+### ✅ Complete Systems
 
-- **Moteur de jeu** : Logique complète de tour, calculs de scores, gestion d'état
-- **Intelligence artificielle** : IA sophistiquée avec décisions stratégiques variées
-- **Système de crises** : Détection, escalade nucléaire, réponses du joueur
-- **Système de contenu** : Headlines dynamiques, descriptions de politiques
-- **Interface utilisateur** : Liste interactive des pays, dialogues, panels d'information
-- **Sauvegarde/Chargement** : Persistance des parties via LocalStorage
-- **Menus authentiques** : Système de menus fidèle au jeu original Pascal
-- **Fenêtres Background et History** : Interface détaillée avec graphiques interactifs
+- **Game engine**: Complete turn logic, score calculations, state management
+- **Artificial intelligence**: Sophisticated AI with varied strategic decisions
+- **Crisis system**: Detection, nuclear escalation, player responses
+- **Content system**: Dynamic headlines, policy descriptions
+- **User interface**: Interactive country list, dialogs, information panels
+- **Save/Load**: Game persistence via LocalStorage
+- **Authentic menus**: Menu system faithful to the original Pascal game
+- **Background and History windows**: Detailed interface with interactive charts
 
-### 🎮 Actions Disponibles
+### 🎮 Available Actions
 
-- **Aide Économique** : Renforce l'économie et améliore les relations
-- **Aide Militaire** : Fournit armes et équipement militaire
-- **Aide à l'Insurrection** : Soutient les groupes rebelles
-- **Intervention Gouvernementale** : Action militaire directe pour soutenir le gouvernement
-- **Intervention Rebelle** : Soutien militaire aux forces rebelles
-- **Pression Diplomatique** : Sanctions et menaces non-militaires
-- **Traités** : Accords formels de coopération
+- **Economic Aid**: Strengthens economy and improves relations
+- **Military Aid**: Provides weapons and military equipment
+- **Insurgency Aid**: Supports rebel groups
+- **Government Intervention**: Direct military action to support government
+- **Rebel Intervention**: Military support for rebel forces
+- **Diplomatic Pressure**: Non-military sanctions and threats
+- **Treaties**: Formal cooperation agreements
 
-### 🚨 Système de Crises
+### 🚨 Crisis System
 
-- **Détection automatique** : Crises déclenchées par des actions provocatrices
-- **Escalade nucléaire** : Niveaux 1-9 avec risque de guerre nucléaire
-- **Réponses du joueur** : Reculer, négocier, refuser, menacer
-- **Conséquences** : Impact sur prestige et relations diplomatiques
+- **Automatic detection**: Crises triggered by provocative actions
+- **Nuclear escalation**: Levels 1-9 with nuclear war risk
+- **Player responses**: Back down, negotiate, refuse, threaten
+- **Consequences**: Impact on prestige and diplomatic relations
 
-## 🎨 Interface Utilisateur
+## 🎨 User Interface
 
-### Écran Principal
+### Main Screen
 
-- **Liste des pays** : Vue interactive des 80 pays organisés par catégories
-- **Panel de scores** : Scores USA/USSR en temps réel
-- **Panel de news** : Événements et headlines dynamiques
-- **Barre de statut** : Informations sur le tour actuel et le pays sélectionné
-- **Menus authentiques** : Apple, Game, Political, Relations, Policy, Events, Briefing, Debug
+- **Country list**: Interactive view of 80 countries organized by categories
+- **Score panel**: Real-time USA/USSR scores
+- **News panel**: Dynamic events and headlines
+- **Status bar**: Information about current turn and selected country
+- **Authentic menus**: Apple, Game, Political, Relations, Policy, Events, Briefing, Debug
 
-### Fenêtres Spécialisées
+### Specialized Windows
 
-- **Background Modal** : 
-  - Sélecteurs interactifs pour les ressources (GNP, Military Spending, Population, etc.)
-  - Visualisation de la carte avec légende
-  - Détails complets du pays sélectionné
-  - Calculs per capita et per GNP
+- **Background Modal**: 
+  - Interactive selectors for resources (GNP, Military Spending, Population, etc.)
+  - Map visualization with legend
+  - Complete details of selected country
+  - Per capita and per GNP calculations
 
-- **History Modal** :
-  - Trois graphiques détaillés (Military & Intervention, Diplomatic & Economic, Political & Influence)
-  - Timeline des événements majeurs
-  - Graphiques interactifs avec couleurs distinctes USA/USSR
-  - Section des changements récents
+- **History Modal**:
+  - Three detailed charts (Military & Intervention, Diplomatic & Economic, Political & Influence)
+  - Major events timeline
+  - Interactive charts with distinct USA/USSR colors
+  - Recent changes section
 
-### Dialogues
+### Dialogs
 
-- **Dialogue Policy** : Sliders pour ajuster les niveaux d'action
-- **Dialogue Crisis** : Choix de réponse aux crises internationales
-- **Dialogue Closeup** : Informations détaillées sur un pays
+- **Policy Dialog**: Sliders to adjust action levels
+- **Crisis Dialog**: Response choices to international crises
+- **Closeup Dialog**: Detailed information about a country
 
-## 🧠 Intelligence Artificielle
+## 🧠 Artificial Intelligence
 
-L'IA implémente une stratégie sophistiquée basée sur :
+The AI implements sophisticated strategy based on:
 
-- **Évaluation des pays** : Importance géopolitique et prestige
-- **Calcul des menaces** : Relations diplomatiques et opportunités
-- **Décisions stratégiques** : Aide économique, militaire, interventions
-- **Niveaux de difficulté** : 4 niveaux avec IA plus agressive
+- **Country evaluation**: Geopolitical importance and prestige
+- **Threat calculation**: Diplomatic relations and opportunities
+- **Strategic decisions**: Economic aid, military aid, interventions
+- **Difficulty levels**: 4 levels with more aggressive AI
 
-## 📊 Données du Jeu
+## 📊 Game Data
 
-### Pays (80 au total)
+### Countries (80 total)
 
-Chaque pays contient :
-- Population et PIB
-- Dépenses militaires et personnel
-- Orientation gouvernementale (gauche/droite)
-- Stabilité gouvernementale
-- Valeur de prestige
+Each country contains:
+- Population and GDP
+- Military spending and personnel
+- Government orientation (left/right)
+- Government stability
+- Prestige value
 
-### Relations Diplomatiques
+### Diplomatic Relations
 
-- Matrice 80x80 des affinités diplomatiques
-- Relations initiales basées sur l'histoire
-- Évolution dynamique selon les actions
+- 80x80 matrix of diplomatic affinities
+- Initial relations based on history
+- Dynamic evolution based on actions
 
-## 🔧 Développement
+## 🔧 Development
 
-### Scripts Disponibles
+### Available Scripts
 
 ```bash
-npm run dev          # Serveur de développement
-npm run build        # Build de production
-npm run preview      # Prévisualiser le build
-npm run lint         # Vérifier le code
+npm run dev          # Development server
+npm run build        # Production build
+npm run preview      # Preview build
+npm run lint         # Code verification
 ```
 
-### Ajout de Fonctionnalités
+### Adding Features
 
-1. **Nouveaux pays** : Modifier `src/data/countries.ts`
-2. **Nouvelles politiques** : Étendre `PolicyType` dans `GameState.ts`
-3. **Nouveau contenu** : Ajouter des templates dans `ContentManager.ts`
-4. **Nouvelle IA** : Modifier la logique dans `AIEngine.ts`
+1. **New countries**: Modify `src/data/countries.ts`
+2. **New policies**: Extend `PolicyType` in `GameState.ts`
+3. **New content**: Add templates in `ContentManager.ts`
+4. **New AI**: Modify logic in `AIEngine.ts`
 
-## 🚀 Déploiement
+## 🚀 Deployment
 
-### Options de Déploiement
+### Deployment Options
 
-- **Netlify** : Déploiement automatique depuis Git
-- **Vercel** : Optimisé pour les applications web modernes
-- **GitHub Pages** : Hébergement gratuit pour projets open source
-- **Serveur personnel** : Build statique à servir
+- **Netlify**: Automatic deployment from Git
+- **Vercel**: Optimized for modern web applications
+- **GitHub Pages**: Free hosting for open source projects
+- **Personal server**: Static build to serve
 
-### Configuration de Production
+### Production Configuration
 
 ```bash
-# Build optimisé
+# Optimized build
 npm run build
 
-# Les fichiers sont générés dans dist/
-# Servir le contenu de dist/ via un serveur web
+# Files are generated in dist/
+# Serve dist/ content via web server
 ```
 
-## 📝 Notes de Version
+## 📝 Version Notes
 
 ### Version 1.0.0
 
-- ✅ Moteur de jeu complet
-- ✅ IA sophistiquée avec 4 niveaux
-- ✅ Système de crises et escalade nucléaire
-- ✅ Système de contenu dynamique
-- ✅ Interface utilisateur moderne avec liste des pays
-- ✅ Sauvegarde/chargement
-- ✅ 80 pays avec données réalistes
-- ✅ Menus authentiques fidèles au jeu original
-- ✅ Fenêtres Background et History avec graphiques interactifs
-- ✅ Système de sélection de pays amélioré
-- ✅ Intégration temps réel avec l'état du jeu
+- ✅ Complete game engine
+- ✅ Sophisticated AI with 4 levels
+- ✅ Crisis system and nuclear escalation
+- ✅ Dynamic content system
+- ✅ Modern user interface with country list
+- ✅ Save/load functionality
+- ✅ 80 countries with realistic data
+- ✅ Authentic menus faithful to original game
+- ✅ Background and History windows with interactive charts
+- ✅ Improved country selection system
+- ✅ Real-time integration with game state
 
-### Nouvelles Fonctionnalités (Dernière mise à jour)
+### Latest Features (Recent Update)
 
-- **Interface Background améliorée** : Sélecteurs interactifs pour visualiser différentes ressources (GNP, dépenses militaires, population, etc.) avec calculs per capita et per GNP
-- **Interface History enrichie** : Graphiques détaillés montrant l'évolution des relations diplomatiques, aides militaires/économiques, et événements politiques
-- **Système de menus authentique** : Menus Apple, Game, Political, Relations, Policy, Events, Briefing, Debug fidèles au jeu original Pascal
-- **Sélection de pays améliorée** : Possibilité de sélectionner un pays sans ouvrir immédiatement le modal, avec bouton "Details" pour accéder aux informations
-- **Affichage de tous les pays** : Liste complète des 80 pays organisés par catégories (Superpower, Great Power, Regional Power, Strategic, Other)
+- **Enhanced Background interface**: Interactive selectors to visualize different resources (GNP, military spending, population, etc.) with per capita and per GNP calculations
+- **Enriched History interface**: Detailed charts showing evolution of diplomatic relations, military/economic aid, and political events
+- **Authentic menu system**: Apple, Game, Political, Relations, Policy, Events, Briefing, Debug menus faithful to original Pascal game
+- **Improved country selection**: Ability to select a country without immediately opening modal, with "Details" button to access information
+- **Complete country display**: Full list of 80 countries organized by categories (Superpower, Great Power, Regional Power, Strategic, Other)
 
-## 🤝 Contribution
+## 🤝 Contributing
 
-Ce projet est une adaptation fidèle du jeu original Balance of Power. Pour contribuer :
+This project is a faithful adaptation of the original Balance of Power game. To contribute:
 
-1. Fork le projet
-2. Créer une branche feature
-3. Commiter les changements
-4. Ouvrir une Pull Request
+1. Fork the project
+2. Create a feature branch
+3. Commit changes
+4. Open a Pull Request
 
-## 📄 Licence
+## 📄 License
 
-⚠️ **Important** : Balance of Power est sous copyright de Chris Crawford. Cette adaptation est créée à des fins éducatives et de préservation du patrimoine vidéoludique.
+⚠️ **Important**: Balance of Power is copyrighted by Chris Crawford. This adaptation is created for educational purposes and preservation of video game heritage.
 
-## 🙏 Remerciements
+## 🙏 Acknowledgments
 
-- **Chris Crawford** : Créateur original de Balance of Power
-- **Communauté** : Pour la préservation des jeux classiques
-- **Contributeurs** : Pour leur travail sur cette adaptation
+- **Chris Crawford**: Original creator of Balance of Power
+- **Community**: For preserving classic games
+- **Contributors**: For their work on this adaptation
 
 ---
 
-*Balance of Power Web Edition - Préserver l'héritage des jeux de stratégie classiques*
+*Balance of Power Web Edition - Preserving the legacy of classic strategy games*
